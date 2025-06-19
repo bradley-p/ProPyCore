@@ -33,7 +33,31 @@ class Submittal(Base):
             additional_headers=headers
         )
 
-    def get(self, company_id, project_id, page=1, per_page=100, status_ids=None):
+    def get_types(self, company_id, project_id):
+        """
+        Gets all the available submittal types
+
+        Parameters
+        ----------
+        company_id : int
+            unique identifier for the company
+        project_id : int
+            unique identifier for the project
+
+        Returns
+        -------
+        submittal_types : dict
+            available submittal types
+        """
+        headers = {
+            "Procore-Company-Id": f"{company_id}"
+        }
+        return self.get_request(
+            api_url=f"{self.endpoint}/v1.0/projects/{project_id}/submittals/filter_options/type",
+            additional_headers=headers
+        )
+    
+    def get(self, company_id, project_id, page=1, per_page=100, status_ids=None, types=None):
         """
         Gets all the available submittals
 
@@ -49,6 +73,8 @@ class Submittal(Base):
             number of companies to include
         status_ids : list of int or str, default None
             filter by status ID
+        types : list of str, default None
+            filter by type
 
         Returns
         -------
@@ -72,6 +98,12 @@ class Submittal(Base):
                     params["filters[status_id]"] = [str(status_id) for status_id in status_ids]
                 else:
                     params["filters[status_id]"] = [str(status_ids)]
+
+            if types is not None:
+                if isinstance(types, list):
+                    params["filters[type]"] = [str(t) for t in types]
+                else:
+                    params["filters[type]"] = [str(types)]
 
             headers = {
                 "Procore-Company-Id": f"{company_id}"

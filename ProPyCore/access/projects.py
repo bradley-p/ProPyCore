@@ -11,7 +11,7 @@ class Projects(Base):
 
         self.endpoint = "/rest/v1.1/projects"
 
-    def get(self, company_id, status="All",per_page=300):
+    def get(self, company_id, status="All", region=None, per_page=300):
         """
         Gets a list of all the projects from a certain company
         https://developers.procore.com/reference/rest/projects?version=latest#list-projects
@@ -24,6 +24,8 @@ class Projects(Base):
             number of companies to include. Max is 300 per v1.1 API.
         status : str enum, default "All"
             status of the projects to get must be one of: ["Active", "Inactive", "All"]
+        region : str or list of str, default None - NOT IMPLMENTED
+            region of the projects to get
 
         Returns
         -------

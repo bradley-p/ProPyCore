@@ -86,3 +86,33 @@ class Punch(Base):
         )
 
         return punch_info
+
+    def get_assignment(self, company_id, project_id, assignment_id):
+        """
+        Gets a specific punch item assignment
+
+        Parameters
+        ----------
+        company_id : int
+            unique identifier for the company
+        project_id : int
+            unique identifier for the project
+        assignment_id : int
+            unique identifier for the punch item assignment
+
+        Returns
+        -------
+        assignment_info : dict
+            specific punch item assignment information
+        """
+
+        headers = {
+            "Procore-Company-Id": f"{company_id}"
+        }
+
+        assignment_info = self.get_request(
+            api_url=f"/rest/v1.0/projects/{project_id}/punch_item_assignments/{assignment_id}",
+            additional_headers=headers
+        )
+
+        return assignment_info

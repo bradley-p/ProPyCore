@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.1] - 2025-06-19
+
+### Added
+* `submittals`: add `get_types()` method with snippets in `submittals.ipynb`
+
+### Changed
+* `submittals`: add `types` parameter to `get()` method
+
 ## [0.7.0] - 2025-06-18
 
 ### Added

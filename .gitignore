@@ -226,3 +226,4 @@ replay_pid*
 *snippets_*
 specs/
 sample_responses/
+.DS_Store

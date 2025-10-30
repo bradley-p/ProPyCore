@@ -1,5 +1,5 @@
 from .exceptions import *
-from .access import companies, generic_tools, projects, documents, rfis, directory, submittals, tasks, budgets, direct_costs, cost_codes, time, quality, photos, permissions, change_events
+from .access import companies, generic_tools, projects, documents, rfis, directory, submittals, tasks, budgets, direct_costs, cost_codes, time, quality, photos, permissions, change_events, drawings
 import requests
 
 class Procore:
@@ -67,6 +67,8 @@ class Procore:
         self.time = time.Time(access_token=self.__access_token, server_url=self.__base_url)
         # Quality
         self.quality = quality.Quality(access_token=self.__access_token, server_url=self.__base_url)
+        # Drawings
+        self.drawings = drawings.Drawings(access_token=self.__access_token, server_url=self.__base_url)
 
     def get_access_token(self):
         """
